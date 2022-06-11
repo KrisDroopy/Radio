@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -105,5 +106,39 @@ public class RadioTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    void jobLombok() {
+        Radio radioLombok = new Radio(2, 1, 20, 3, 5, 1, 5);
+
+
+        assertEquals(5, radioLombok.getAmountStations());
+        assertEquals(1, radioLombok.getMinStation());
+        assertEquals(5, radioLombok.getMaxStation());
+        assertEquals(1, radioLombok.getMinVolume());
+        assertEquals(20, radioLombok.getMaxVolume());
+        assertEquals(3, radioLombok.getStation());
+        assertEquals(2, radioLombok.getCurrentVolume());
+    }
+
+    @Test
+    void shouldSetAndGet() {
+        Radio radio = new Radio();
+
+        radio.setCurrentVolume(5);
+        radio.setMinVolume(1);
+        radio.setMaxVolume(15);
+        radio.setStation(7);
+        radio.setMinStation(1);
+        radio.setMaxStation(10);
+        radio.setAmountStations(10);
+
+        assertEquals(10, radio.getAmountStations());
+        assertEquals(1, radio.getMinStation());
+        assertEquals(10, radio.getMaxStation());
+        assertEquals(1, radio.getMinVolume());
+        assertEquals(15, radio.getMaxVolume());
+        assertEquals(7, radio.getStation());
+        assertEquals(5, radio.getCurrentVolume());
+    }
 
 }
