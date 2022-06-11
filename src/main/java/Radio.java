@@ -1,73 +1,80 @@
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+
 public class Radio {
     private int currentVolume;
+    private int minVolume = 0;
+    private int maxVolume = 100;
     private int station;
+    private int amountStations = 10;
+    private int minStation = 0;
+    private int maxStation = 9;
+
+
+    public Radio(int amountStations) {
+        this.amountStations = amountStations;
+        maxStation = amountStations - 1;
+    }
+
 
     public void setCurrentVolume(int currentVolume) {
-        if (currentVolume < 0) {
+        if (currentVolume < minVolume) {
             return;
         }
-        if (currentVolume > 10) {
+        if (currentVolume > maxVolume) {
             return;
         }
         this.currentVolume = currentVolume;
     }
 
     public void decreaseVolume() {
-        if (currentVolume != 0) {
+        if (currentVolume != minVolume) {
             currentVolume--;
-        }
-        else  {
-            currentVolume = 0;
+        } else {
+            currentVolume = minVolume;
         }
         this.currentVolume = currentVolume;
     }
 
     public void increaseVolume() {
-        if (currentVolume != 10) {
+        if (currentVolume != maxVolume) {
             currentVolume++;
-        }
-        else  {
-            currentVolume = 10;
+        } else {
+            currentVolume = maxVolume;
         }
         this.currentVolume = currentVolume;
     }
 
-    public int getCurrentVolume() {
-        return currentVolume;
-    }
-
     public void setStation(int station) {
-        if (station < 0) {
+        if (station < minStation) {
             return;
         }
-        if (station > 9) {
+        if (station > maxStation) {
             return;
         }
         this.station = station;
     }
 
     public void nextStation() {
-        if (station != 9) {
+        if (station != maxStation) {
             station++;
-        }
-        else  {
-            station = 0;
+        } else {
+            station = minStation;
         }
         this.station = station;
     }
 
     public void prevStation() {
-        if (station != 0) {
+        if (station != minStation) {
             station--;
-        }
-        else  {
-            station = 9;
+        } else {
+            station = maxStation;
         }
         this.station = station;
     }
-
-    public int getStation() {
-        return station;
-    }
-
 }
