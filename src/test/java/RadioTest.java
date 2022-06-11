@@ -8,55 +8,62 @@ public class RadioTest {
     @ParameterizedTest
     @CsvSource(
             value = {
-                    "4, 4",
-                    "-1, 0",
-                    "11, 0"
+                    "4, 4, 23, 23",
+                    "-1, 0, -10, 0",
+                    "11, 0, 31, 0"
             }
     )
-    void shouldStation(int newStation, int expected) {
+    void shouldStation(int newStation, int expected, int newStation1, int expected1) {
         Radio radio = new Radio();
+        Radio radio1 = new Radio(30);
+
         radio.setStation(newStation);
+        radio1.setStation(newStation1);
 
-        int actual = radio.getStation();
-
-        assertEquals(expected, actual);
+        assertEquals(expected, radio.getStation());
+        assertEquals(expected1, radio1.getStation());
     }
 
     @ParameterizedTest
     @CsvSource(
             value = {
-                    "0, 1",
-                    "9, 0"
+                    "0, 1, 13, 14",
+                    "9, 0, 29, 0"
             }
     )
-    void shouldNextStation(int newStation, int expected) {
+    void shouldNextStation(int newStation, int expected, int newStation1, int expected1) {
         Radio radio = new Radio();
+        Radio radio1 = new Radio(30);
+
         radio.setStation(newStation);
+        radio1.setStation(newStation1);
 
         radio.nextStation();
+        radio1.nextStation();
 
-        int actual = radio.getStation();
-
-
-        assertEquals(expected, actual);
+        assertEquals(expected, radio.getStation());
+        assertEquals(expected1, radio1.getStation());
     }
 
     @ParameterizedTest
     @CsvSource(
             value = {
-                    "5, 4",
-                    "0, 9"
+                    "5, 4, 20, 19",
+                    "0, 9, 0, 29"
             }
     )
-    void shouldPrevStation(int newStation, int expected) {
+    void shouldPrevStation(int newStation, int expected, int newStation1, int expected1) {
         Radio radio = new Radio();
+        Radio radio1 = new Radio(30);
+
         radio.setStation(newStation);
+        radio1.setStation(newStation1);
 
         radio.prevStation();
+        radio1.prevStation();
 
-        int actual = radio.getStation();
-
-        assertEquals(expected, actual);
+        assertEquals(expected, radio.getStation());
+        assertEquals(expected1, radio1.getStation());
     }
 
     @ParameterizedTest
@@ -65,7 +72,7 @@ public class RadioTest {
                     "0, 0",
                     "3, 2",
                     "-1, 0",
-                    "11, 0"
+                    "101, 0"
             }
     )
     void shouldDecreaseVolume(int newCurrentVolume, int expected) {
@@ -83,7 +90,8 @@ public class RadioTest {
     @CsvSource(
             value = {
                     "0, 1",
-                    "10, 10"
+                    "50, 51",
+                    "100, 100"
             }
     )
     void shouldIncreaseVolume(int newCurrentVolume, int expected) {
@@ -96,4 +104,6 @@ public class RadioTest {
 
         assertEquals(expected, actual);
     }
+
+
 }
